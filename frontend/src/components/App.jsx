@@ -1,9 +1,13 @@
 import React from 'react';
+import Blog from './Blog'
+import {PostProvider} from '../contexts/postContext'
 
 const App = () => {
     return (
-        <h2>Hello world</h2>
+        <PostProvider>
+            <Blog />
+        </PostProvider>
     );
 }
- 
+
 export default App;
