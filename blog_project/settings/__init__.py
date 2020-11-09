@@ -104,3 +104,5 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 SITE_ID = 1
+
+MEDIA_URL = '/media/'
