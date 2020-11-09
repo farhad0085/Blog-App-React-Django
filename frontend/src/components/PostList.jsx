@@ -10,6 +10,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Hidden from '@material-ui/core/Hidden';
 import {Link} from 'react-router-dom'
 import { Button } from '@material-ui/core';
+import {getPostTime} from '../utils'
 
 
 const useStyles = makeStyles({
@@ -37,8 +38,8 @@ export default function PostList(props) {
                             <Typography component="h2" variant="h5">
                                 <Link to={`/post/${post.id}`}>{post.title}</Link>
                             </Typography>
-                            <Typography variant="subtitle1" color="textSecondary">
-                                {new Date(post.date_updated).toString()}
+                            <Typography variant="body2" color="textSecondary" component="p">
+                                Last updated: {getPostTime(post.date_updated)}
                             </Typography>
                             <Typography variant="subtitle1" paragraph>
                                 {post.excerpt}

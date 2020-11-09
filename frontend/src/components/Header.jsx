@@ -7,7 +7,6 @@ import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Link as RouterLink } from 'react-router-dom'
-import Link from '@material-ui/core/Link'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -37,11 +36,9 @@ export default function Header(props) {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" className={classes.title}>
-                        <Link color="inherit" to="/" component={RouterLink}>{title}</Link>
+                        <Button color="inherit" to="/" component={RouterLink}>{title}</Button>
                     </Typography>
-                    {sections.map(section => <Button color="inherit">{section.title}</Button>)}
-                    <Button color="inherit">Login</Button>
-                    <Button color="inherit">Signup</Button>
+                    {sections.map(section => <Button component={RouterLink} to={section.url} key={section.title} color="inherit">{section.title}</Button>)}
                 </Toolbar>
             </AppBar>
         </div>

@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
-import Post from '../classes/post'
 import { useState } from 'react';
 import Loading from './loading'
+import {getPostTime} from '../utils'
+import {PostContext} from '../contexts/postContext'
+
 
 const useStyles = makeStyles({
     card: {
@@ -21,12 +23,13 @@ const useStyles = makeStyles({
     },
 });
 
-const post = new Post()
+// const post = new Post()
 
 export default function PostList(props) {
     const classes = useStyles();
     const [state, setState] = useState({})
     const [loading, setLoading] = useState(true)
+    const {post} = useContext(PostContext)
 
     const post_id = props.match.params.id
 
@@ -54,7 +57,7 @@ export default function PostList(props) {
                             </Typography>
 
                             <Typography variant="body2" color="textSecondary" component="p">
-                                {new Date(state.date_updated).toString()}
+                            Last updated: {getPostTime(post.date_updated)}
                             </Typography>
                             <hr/>
 

@@ -19,6 +19,7 @@ class PostProvider extends Component {
 
 
     componentDidMount() {
+        console.log("called this");
         post.getPosts()
             .then((data) => this.setState({
                 data: data,
@@ -32,10 +33,12 @@ class PostProvider extends Component {
                 })
             })
     }
+    
 
     render() {
+        
         return (
-            <Provider value={{ ...this.state }}>
+            <Provider value={{ ...this.state, post }}>
                 {this.props.children}
             </Provider>
         );

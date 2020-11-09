@@ -38,7 +38,7 @@ class Post(models.Model):
 
     # relationship
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    picture = models.ManyToManyField('PostPicture')    
+    picture = models.ManyToManyField('PostPicture')
 
     def get_excerpt(self):
         """Get excerpt for post"""

@@ -13,7 +13,10 @@ const sections = [
     { title: 'Culture', url: '#' },
     { title: 'Business', url: '#' },
     { title: 'Politics', url: '#' },
-    { title: 'Opinion', url: '#' }
+    { title: 'Opinion', url: '#' },
+    { title: 'Create new post', url: '/posts/new' },
+    { title: 'Sign in', url: '/signin' },
+    { title: 'Sign up', url: '/signup' },
 ];
 
 
