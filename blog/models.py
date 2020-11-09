@@ -34,13 +34,13 @@ class Post(models.Model):
     title = models.CharField(max_length=400)
     body = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
-    date_updated = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
 
     # relationship
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     picture = models.ManyToManyField('PostPicture')    
 
-    def excerpt(self):
+    def get_excerpt(self):
         """Get excerpt for post"""
 
         return self.body[:200]
@@ -48,7 +48,7 @@ class Post(models.Model):
     def get_featured_image(self):
         """Get featured image for one post"""
 
-        return self.picture.first()
+        return self.picture.first().picture.url
 
 
     def __str__(self):

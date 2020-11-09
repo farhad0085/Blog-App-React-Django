@@ -27,8 +27,12 @@ class UserProfileAdmin(admin.ModelAdmin):
 class PostAdmin(admin.ModelAdmin):
     """Customize admin interface for this model"""
 
-    list_display = ['title', 'get_post_view', 'user', 'get_featured_image', 'excerpt', 'date_created', 'date_updated']
+    list_display = ['title', 'get_post_view', 'user', 'get_featured_image', 'get_excerpt', 'date_created', 'date_updated']
 
+    def get_excerpt(self, instance):
+        """Get short body for a post"""
+        
+        return instance.get_excerpt()
 
     def get_post_view(self, instance):
         """Get post view for a post"""
@@ -40,6 +44,7 @@ class PostAdmin(admin.ModelAdmin):
         
         return instance.get_featured_image()
 
+    get_excerpt.short_description = "Excerpt"
     get_post_view.short_description = "Views"
     get_featured_image.short_description = "Featured Image"
 

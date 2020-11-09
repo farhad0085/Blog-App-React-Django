@@ -11,9 +11,6 @@ class PostViewSet(ModelViewSet):
     permission_classes = [IsOwnPostModify]
     lookup_field = 'id'
     
-    
-    def perform_update(self, serializer):
-        serializer.save(user=self.request.user)
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
