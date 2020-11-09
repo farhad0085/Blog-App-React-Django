@@ -56,6 +56,8 @@ class Post(models.Model):
 
         return self.title
 
+    class Meta:
+        ordering = ['-date_created']
 
 
 class PostPicture(models.Model):

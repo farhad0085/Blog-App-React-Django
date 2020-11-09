@@ -6,7 +6,8 @@ import Header from './Header';
 import FeaturedPost from './FeaturedPost';
 import Footer from './Footer';
 import { PostContext } from '../contexts/postContext';
-import {createUUID} from '../utils'
+import { createUUID } from '../utils'
+import Loading from './loading';
 
 
 const sections = [
@@ -25,7 +26,7 @@ const sections = [
 
 export default function Blog() {
 
-    const {data} = useContext(PostContext)
+    const { data, loading } = useContext(PostContext)
     const posts = data.results
 
     return (
@@ -34,11 +35,15 @@ export default function Blog() {
             <Container maxWidth="lg">
                 <Header title="Blog App (React + Django)" sections={sections} />
                 <main>
-                    <Grid container spacing={4}>
-                        {posts.map((post) => (
-                            <FeaturedPost key={createUUID()} post={post} />
-                        ))}
-                    </Grid>
+
+                    {loading ? <Loading /> : (
+                        <Grid container spacing={4}>
+                            {posts.map((post) => (
+                                <FeaturedPost key={createUUID()} post={post} />
+                            ))}
+                        </Grid>
+                    )}
+
                 </main>
             </Container>
             <Footer title="Footer" description="Something here to give the footer a purpose!" />
