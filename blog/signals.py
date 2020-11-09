@@ -9,6 +9,7 @@ def create_user_profile(sender, instance, created, **kwargs):
 
     if created:
         UserProfile.objects.create(
+            birth_date='1900-01-01',
             user=instance
         )
         

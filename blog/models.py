@@ -1,13 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils import timesince
+from django.utils import timesince, timezone
 
 PICTURE_UPLOAD_TO = "images"
 
 class UserProfile(models.Model):
     """Hold some extra fields for default user model"""
     
-    birth_date = models.DateField(blank=True, null=True)
+    birth_date = models.DateField()
     bio = models.TextField(blank=True, null=True)
     picture = models.ImageField(upload_to=PICTURE_UPLOAD_TO, default="default.jpg")
 

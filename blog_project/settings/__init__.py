@@ -17,7 +17,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # project apps
-    'blog',
+    'blog.apps.BlogConfig',
 
     # rest framework
     'rest_framework',
@@ -29,6 +29,8 @@ INSTALLED_APPS = [
     # auth
     'django.contrib.sites',
     'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     'rest_auth',
     'rest_auth.registration',
 ]
@@ -70,6 +72,9 @@ WSGI_APPLICATION = 'blog_project.wsgi.application'
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            'min_length': 6,
+        }
     }
 ]
 
