@@ -8,6 +8,9 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Hidden from '@material-ui/core/Hidden';
+import {Link} from 'react-router-dom'
+import { Button } from '@material-ui/core';
+
 
 const useStyles = makeStyles({
     card: {
@@ -27,12 +30,12 @@ export default function PostList(props) {
 
     return (
         <Grid item xs={12} md={6}>
-            <CardActionArea component="a" href="#">
+            <CardActionArea>
                 <Card className={classes.card}>
                     <div className={classes.cardDetails}>
                         <CardContent>
                             <Typography component="h2" variant="h5">
-                                {post.title}
+                                <Link to={`/post/${post.id}`}>{post.title}</Link>
                             </Typography>
                             <Typography variant="subtitle1" color="textSecondary">
                                 {new Date(post.date_updated).toString()}
@@ -41,8 +44,8 @@ export default function PostList(props) {
                                 {post.excerpt}
                             </Typography>
                             <Typography variant="subtitle1" color="primary">
-                                Continue reading...
-              </Typography>
+                            <Link to={`/post/${post.id}`}><Button color="primary">Continue reading...</Button></Link>
+                            </Typography>
                         </CardContent>
                     </div>
                     <Hidden xsDown>

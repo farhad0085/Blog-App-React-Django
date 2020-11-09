@@ -6,39 +6,44 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
 import MenuIcon from '@material-ui/icons/Menu';
-import {Link} from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
+import Link from '@material-ui/core/Link'
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      flexGrow: 1,
+        flexGrow: 1,
     },
     menuButton: {
-      marginRight: theme.spacing(2),
+        marginRight: theme.spacing(2),
     },
     title: {
-      flexGrow: 1,
+        flexGrow: 1,
     },
-  }));
+    toolbarLink: {
+        padding: theme.spacing(1),
+        flexShrink: 0,
+      },
+}));
 
 export default function Header(props) {
     const classes = useStyles();
     const { sections, title } = props;
 
-  return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            <Link to="/">{title}</Link>
-          </Typography>
-            {sections.map(section => <Button color="inherit">{section.title}</Button>)}
-            <Button color="inherit">Login</Button>
-            <Button color="inherit">Signup</Button>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+    return (
+        <div className={classes.root}>
+            <AppBar position="static">
+                <Toolbar>
+                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                        <MenuIcon />
+                    </IconButton>
+                    <Typography variant="h6" className={classes.title}>
+                        <Link color="inherit" to="/" component={RouterLink}>{title}</Link>
+                    </Typography>
+                    {sections.map(section => <Button color="inherit">{section.title}</Button>)}
+                    <Button color="inherit">Login</Button>
+                    <Button color="inherit">Signup</Button>
+                </Toolbar>
+            </AppBar>
+        </div>
+    );
 }

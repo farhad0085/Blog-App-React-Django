@@ -25,7 +25,7 @@ const App = () => {
                 <Header title="Blog App (React + Django)" sections={sections} />
                 <Routes />
             </Container>
-            <Footer title="Footer" description="Something here to give the footer a purpose!" />
+            <Footer description="Something here to give the footer a purpose!" />
         </PostProvider>
     );
 }

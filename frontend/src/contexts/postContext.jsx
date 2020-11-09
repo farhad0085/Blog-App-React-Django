@@ -28,14 +28,14 @@ class PostProvider extends Component {
             .catch(e => {
                 this.setState({
                     loading: false,
-                    error: "Failed to load projects at this moment. Please try again later!"
+                    error: "Failed to load posts at this moment. Please try again later!"
                 })
             })
     }
 
     render() {
         return (
-            <Provider value={{ ...this.state, getPosts: this.getPosts }}>
+            <Provider value={{ ...this.state }}>
                 {this.props.children}
             </Provider>
         );
