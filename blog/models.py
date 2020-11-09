@@ -40,10 +40,22 @@ class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     picture = models.ManyToManyField('PostPicture')    
 
+    def excerpt(self):
+        """Get excerpt for post"""
+
+        return self.body[:200]
+
+    def get_featured_image(self):
+        """Get featured image for one post"""
+
+        return self.picture.first()
+
+
     def __str__(self):
         """String representation for this model"""
 
         return self.title
+
 
 
 class PostPicture(models.Model):
