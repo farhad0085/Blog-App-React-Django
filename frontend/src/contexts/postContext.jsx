@@ -1,11 +1,11 @@
 import React, { Component, createContext } from 'react';
-import axios from '../utils/axios'
+import Post from '../classes/post'
 
 
 let Context = null
 
 const { Provider, Consumer } = Context = createContext()
-
+const post = new Post()
 
 class PostProvider extends Component {
 
@@ -18,9 +18,9 @@ class PostProvider extends Component {
     }
 
 
-    getPosts = () => {
-        axios.get("/posts/")
-            .then(({ data }) => this.setState({
+    componentDidMount() {
+        post.getPosts()
+            .then((data) => this.setState({
                 data: data,
                 error: null,
                 loading: false
@@ -33,13 +33,9 @@ class PostProvider extends Component {
             })
     }
 
-    componentDidMount(){
-        this.getPosts()
-    }
-
     render() {
         return (
-            <Provider value={{...this.state, getPosts: this.getPosts}}>
+            <Provider value={{ ...this.state, getPosts: this.getPosts }}>
                 {this.props.children}
             </Provider>
         );
