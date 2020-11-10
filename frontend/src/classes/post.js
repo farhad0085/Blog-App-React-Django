@@ -1,12 +1,24 @@
 import axios from '../utils/axios'
 import {getHeaders} from '../utils'
 
+
+const PAGE_SIZE = 10
+
+
 export default class Post {
 
+    constructor(){
+        this.totalItem = 0
+        this.totalPage = 1
+    }
 
     async getPosts() {
         try {
             const { data } = await axios.get("/posts/")
+
+            this.totalItem = data.count
+            this.totalPage = this.getTotalPage()
+
             return data
         }
         catch {
@@ -48,5 +60,16 @@ export default class Post {
             throw err
         }
     }
+
+
+
+
+    getTotalPage(){
+        const totalItem = this.totalItem
+        const pages = Math.ceil(totalItem / PAGE_SIZE)
+        return pages
+
+    }
+
 
 }

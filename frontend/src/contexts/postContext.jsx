@@ -9,42 +9,9 @@ const post = new Post()
 
 class PostProvider extends Component {
 
-    state = {
-        loading: true,
-        error: null,
-        data: {
-            results: []
-        }
-    }
-
-    getPosts() {
-        post.getPosts()
-            .then((data) => {
-                // if (this.state.data.results !== data.results) {
-                    this.setState({
-                        data: data,
-                        error: null,
-                        loading: false
-                    })
-                // }
-            })
-            .catch(e => {
-                this.setState({
-                    loading: false,
-                    error: "Failed to load posts at this moment. Please try again later!"
-                })
-            })
-    }
-
-    componentDidMount() {
-        this.getPosts()
-    }
-
-
     render() {
-        console.log('render called');
         return (
-            <Provider value={{ ...this.state, post, getPosts: this.getPosts.bind(this) }}>
+            <Provider value={{ post }}>
                 {this.props.children}
             </Provider>
         );

@@ -7,8 +7,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import { useState } from 'react';
 import Loading from './loading'
-import {getPostTime} from '../utils'
-import {PostContext} from '../contexts/postContext'
+import { getPostTime } from '../utils'
+import { PostContext } from '../contexts/postContext'
 
 
 const useStyles = makeStyles({
@@ -25,11 +25,11 @@ const useStyles = makeStyles({
 
 // const post = new Post()
 
-export default function PostList(props) {
+export default function PostDetails(props) {
     const classes = useStyles();
     const [state, setState] = useState({})
     const [loading, setLoading] = useState(true)
-    const {post} = useContext(PostContext)
+    const { post } = useContext(PostContext)
 
     const post_id = props.match.params.id
 
@@ -49,7 +49,7 @@ export default function PostList(props) {
             {loading ? <Loading /> : (
                 <Card className={classes.card}>
                     <div className={classes.cardDetails}>
-                    <CardMedia className={classes.cardMedia} image={state.picture} title={state.title} />
+                        <CardMedia className={classes.cardMedia} image={state.picture} title={state.title} />
 
                         <CardContent>
                             <Typography component="h2" variant="h5">
@@ -59,7 +59,7 @@ export default function PostList(props) {
                             <Typography variant="body2" color="textSecondary" component="p">
                                 Last updated: {getPostTime(state.date_updated)}
                             </Typography>
-                            <hr/>
+                            <hr />
 
                             <Typography variant="subtitle1" color="textSecondary">
                                 {state.body}
