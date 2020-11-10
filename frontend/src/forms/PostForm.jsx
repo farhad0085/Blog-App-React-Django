@@ -10,31 +10,17 @@ import Container from '@material-ui/core/Container';
 import { PostContext } from '../contexts/postContext'
 import { Input } from '@material-ui/core';
 import Loading from '../components/loading'
+import { AuthContext } from '../contexts/authContext';
 
 
-
-const useStyles = makeStyles((theme) => ({
-    paper: {
-        marginTop: theme.spacing(8),
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-    },
-    avatar: {
-        margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main,
-    },
-    form: {
-        width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing(1),
-    },
-    submit: {
-        margin: theme.spacing(3, 0, 2),
-    },
-}));
 
 export default function SignIn(props) {
     const classes = useStyles();
+    const {user} = useContext(AuthContext)
+
+    if (!user.isAuthenticated){
+        props.history.push('/')
+    }
 
     const [state, setState] = useState({
         title: '',
@@ -142,3 +128,27 @@ export default function SignIn(props) {
         </Container>
     );
 }
+
+
+
+
+
+const useStyles = makeStyles((theme) => ({
+    paper: {
+        marginTop: theme.spacing(8),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
+    avatar: {
+        margin: theme.spacing(1),
+        backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+        width: '100%', // Fix IE 11 issue.
+        marginTop: theme.spacing(1),
+    },
+    submit: {
+        margin: theme.spacing(3, 0, 2),
+    },
+}));

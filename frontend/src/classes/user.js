@@ -26,6 +26,18 @@ export default class User {
         }
     }
 
+    async register(email, username, password) {
+        const { data } = await axios.post("/auth/register/", { email, username, password1: password, password2: password })
+        try {
+            localStorage.setItem('token', data.key)
+            this.isAuthenticated = true
+            return this.isAuthenticated
+        }
+        catch (err) {
+            throw err
+        }
+    }
+
 
     logout() {
         axios.post("/auth/logout/", {}, { headers: getHeaders() })

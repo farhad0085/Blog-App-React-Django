@@ -16,6 +16,7 @@ class AuthProvider extends Component {
             register: {}
         },
         login: (username, password) => this.login(username, password),
+        register: (email, username, password) => this.register(email, username, password),
         logout: () => this.logout(),
     }
 
@@ -42,11 +43,35 @@ class AuthProvider extends Component {
             })
     }
 
+    register(email, username, password){
+        user.register(email, username, password)
+            .then(data => {
+                this.setState({
+                    isAuthenticated: true,
+                    errors: {
+                        login: {},
+                        register: {}
+                    }
+                })
+            })
+            .catch(err => {
+                console.dir(err);
+                this.setState({
+                    isAuthenticated: false,
+                    errors: {
+                        login: {},
+                        register: {}
+                    }
+                })
+            })
+    }
+
     logout(){
         user.logout()
         this.setState({
             isAuthenticated: false
         })
+        console.log(this.props);
     }
 
     render() {
