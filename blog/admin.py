@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import UserProfile, Post, PostPicture, PostView
+from .models import UserProfile, Post, PostView
 
 
 class UserProfileAdmin(admin.ModelAdmin):
@@ -27,7 +27,7 @@ class UserProfileAdmin(admin.ModelAdmin):
 class PostAdmin(admin.ModelAdmin):
     """Customize admin interface for this model"""
 
-    list_display = ['title', 'get_post_view', 'user', 'get_featured_image', 'get_excerpt', 'date_created', 'date_updated']
+    list_display = ['title', 'get_post_view', 'user', 'get_excerpt', 'picture', 'date_created', 'date_updated']
 
     def get_excerpt(self, instance):
         """Get short body for a post"""
@@ -39,14 +39,9 @@ class PostAdmin(admin.ModelAdmin):
         
         return instance.postview.view
 
-    def get_featured_image(self, instance):
-        """Get post view for a post"""
-        
-        return instance.get_featured_image()
 
     get_excerpt.short_description = "Excerpt"
     get_post_view.short_description = "Views"
-    get_featured_image.short_description = "Featured Image"
 
 
 class PostViewAdmin(admin.ModelAdmin):
@@ -57,5 +52,4 @@ class PostViewAdmin(admin.ModelAdmin):
 
 admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(Post, PostAdmin)
-admin.site.register(PostPicture)
 admin.site.register(PostView, PostViewAdmin)

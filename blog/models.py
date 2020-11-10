@@ -38,17 +38,12 @@ class Post(models.Model):
 
     # relationship
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    picture = models.ManyToManyField('PostPicture')
+    picture = models.ImageField(upload_to='images', default='images/default.jpg')
 
     def get_excerpt(self):
         """Get excerpt for post"""
 
         return self.body[:200]
-
-    def get_featured_image(self):
-        """Get featured image for one post"""
-
-        return self.picture.first().picture.url
 
 
     def __str__(self):
@@ -59,16 +54,6 @@ class Post(models.Model):
     class Meta:
         ordering = ['-date_created']
 
-
-class PostPicture(models.Model):
-    """Post Picture model"""
-    
-    picture = models.ImageField(upload_to=PICTURE_UPLOAD_TO)
-
-    def __str__(self):
-        """String representation for this model"""
-
-        return self.picture.url
 
 
 class PostView(models.Model):
