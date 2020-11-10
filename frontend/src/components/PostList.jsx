@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -12,18 +11,6 @@ import {Link as RouterLink} from 'react-router-dom'
 import { Button } from '@material-ui/core';
 import {getPostTime} from '../utils'
 
-
-const useStyles = makeStyles({
-    card: {
-        display: 'flex',
-    },
-    cardDetails: {
-        flex: 1,
-    },
-    cardMedia: {
-        width: 160,
-    },
-});
 
 export default function PostList(props) {
     const classes = useStyles();
@@ -45,7 +32,8 @@ export default function PostList(props) {
                                 {post.excerpt}
                             </Typography>
                             <Typography variant="subtitle1" color="primary">
-                            <Button component={RouterLink} to={`/post/${post.id}`} color="primary">Read More</Button>
+                            <Button component={RouterLink} to={`/user/${post.user.username}`} color="primary">Posted by: {post.user.username}</Button>
+                            <Button component={RouterLink} to={`/post/${post.id}`} className={classes.rightAligned} variant="contained" color="primary">Read More</Button>
                             </Typography>
                         </CardContent>
                     </div>
@@ -58,6 +46,18 @@ export default function PostList(props) {
     );
 }
 
-PostList.propTypes = {
-    post: PropTypes.object,
-};
+
+const useStyles = makeStyles({
+    card: {
+        display: 'flex',
+    },
+    cardDetails: {
+        flex: 1,
+    },
+    cardMedia: {
+        width: 160,
+    },
+    rightAligned: {
+        float: 'right'
+    }
+});

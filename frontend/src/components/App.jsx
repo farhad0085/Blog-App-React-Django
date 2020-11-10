@@ -6,6 +6,7 @@ import { PostProvider } from '../contexts/postContext'
 import { AuthProvider } from '../contexts/authContext'
 import Header from './Header';
 import Footer from './Footer';
+import { ProfileProvider } from '../contexts/profileContext';
 
 
 const sections = [
@@ -18,12 +19,14 @@ const App = () => {
     return (
         <AuthProvider>
             <PostProvider>
-                <CssBaseline />
-                <Container maxWidth="lg">
-                    <Header title="Blog App (React + Django)" sections={sections} />
-                    <Routes />
-                </Container>
-                <Footer description="Something here to give the footer a purpose!" />
+                <ProfileProvider>
+                    <CssBaseline />
+                    <Container maxWidth="lg">
+                        <Header title="Blog App (React + Django)" sections={sections} />
+                        <Routes />
+                    </Container>
+                    <Footer description="Something here to give the footer a purpose!" />
+                </ProfileProvider>
             </PostProvider>
         </AuthProvider>
     );

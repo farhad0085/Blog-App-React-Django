@@ -5,6 +5,7 @@ import PostDetails from './PostDetails'
 import PostForm from '../forms/PostForm'
 import SigninForm from '../forms/SigninForm'
 import SignupForm from '../forms/SignupForm'
+import Profile from './Profile'
 
 const Routes = () => {
     return (
@@ -15,6 +16,7 @@ const Routes = () => {
             <Route path="/posts/new" component={PostForm} />
             <Route path="/signin" component={SigninForm} />
             <Route path="/signup" component={SignupForm} />
+            <Route path="/user/:username" component={Profile} />
         </Switch>
     )
 }

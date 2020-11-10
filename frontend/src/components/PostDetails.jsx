@@ -58,6 +58,7 @@ export default function PostDetails(props) {
 
                             <Typography variant="body2" color="textSecondary" component="p">
                                 Last updated: {getPostTime(state.date_updated)}
+                                Post by: {state.user.username}
                             </Typography>
                             <hr />
 
