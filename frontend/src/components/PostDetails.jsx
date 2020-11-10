@@ -9,6 +9,8 @@ import { useState } from 'react';
 import Loading from './loading'
 import { getPostTime } from '../utils'
 import { PostContext } from '../contexts/postContext'
+import { Link } from '@material-ui/core'
+import { Link as RouterLink } from 'react-router-dom'
 
 
 
@@ -47,7 +49,7 @@ export default function PostDetails(props) {
 
                             <Typography variant="body2" color="textSecondary" component="p">
                                 Last updated: {getPostTime(state.date_updated)}
-                                Post by: {state.user.username}
+                                Post by: <Link component={RouterLink} to={`/user/${state.user.username}`}>{state.user.username}</Link>
                             </Typography>
                             <hr />
 

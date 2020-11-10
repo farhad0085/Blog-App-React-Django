@@ -1,6 +1,6 @@
 from .models import Post
 from .serializers import PostSerializer, UserSerializer
-from .permissions import IsOwnPostModify
+from .permissions import IsOwnPostModify, IsOwnProfile
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
@@ -22,7 +22,7 @@ class PostViewSet(ModelViewSet):
 class UserRetrieveUpdateAPIView(RetrieveUpdateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnProfile]
     lookup_field = 'username'
     # parser_classes = [MultiPartParser, FormParser]
     

@@ -10,3 +10,16 @@ class IsOwnPostModify(IsAuthenticated):
 
     def has_object_permission(self, request, view, obj):
         return True
+
+
+class IsOwnProfile(BasePermission):
+    """Allows only owner to modify their profile"""
+
+    def has_object_permission(self, request, view, obj):
+
+        if request.method in SAFE_METHODS:
+            return True
+
+        if obj == request.user:
+            return True
+        return False 
