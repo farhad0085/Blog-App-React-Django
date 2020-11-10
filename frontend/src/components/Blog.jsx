@@ -5,29 +5,13 @@ import { PostContext } from '../contexts/postContext';
 import { createUUID } from '../utils'
 import Loading from './loading';
 import Typography from '@material-ui/core/Typography';
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
-
-
-function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
+import Alert from './Alert'
 
 
 export default function Blog() {
 
     const { data, loading, error } = useContext(PostContext)
     const posts = data.results
-
-    const [err, setErr] = React.useState(true)
-
-    const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
-        setErr(false);
-    };
 
     return (
         <>
@@ -48,11 +32,7 @@ export default function Blog() {
                 )}
 
                 {error && (
-                    <Snackbar open={err} onClose={handleClose} autoHideDuration={6000}>
-                        <Alert onClose={handleClose} severity="error">
-                            {error}
-                        </Alert>
-                    </Snackbar>
+                    <Alert duration={6000} message={error} type="error" />
                 )}
 
             </main>
