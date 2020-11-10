@@ -37,11 +37,11 @@ export default function Blog(props) {
                 }
             })
             .catch(e => {
-                setState({
-                    ...state,
-                    error: "Failed to load posts at this moment. Please try again later!"
-                })
-                setLoading(false)
+                    setState({
+                        ...state,
+                        error: "Failed to load posts at this moment. Please try again later!"
+                    })
+                    setLoading(false)
             })
     }
 
