@@ -10,24 +10,9 @@ const profile = new Profile()
 
 class ProfileProvider extends Component {
 
-    state = {
-
-    }
-
-    getProfileData(username) {
-        profile.getProfileData(username)
-            .then(data => {
-                if (JSON.stringify(this.state) !== JSON.stringify(data)) {
-                    this.setState({
-                        ...data
-                    });
-                }
-            })
-    }
-
     render() {
         return (
-            <Provider value={{ profile: this.state, getProfileData: this.getProfileData.bind(this) }}>
+            <Provider value={{ profile }}>
                 {this.props.children}
             </Provider>
         );

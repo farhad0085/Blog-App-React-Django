@@ -11,19 +11,8 @@ import { getPostTime } from '../utils'
 import { PostContext } from '../contexts/postContext'
 
 
-const useStyles = makeStyles({
-    card: {
-        display: 'flex'
-    },
-    cardDetails: {
-        flex: 1,
-    },
-    cardMedia: {
-        height: 400
-    },
-});
 
-// const post = new Post()
+
 
 export default function PostDetails(props) {
     const classes = useStyles();
@@ -74,3 +63,16 @@ export default function PostDetails(props) {
         </Grid>
     );
 }
+
+
+const useStyles = makeStyles({
+    card: {
+        display: 'flex'
+    },
+    cardDetails: {
+        flex: 1,
+    },
+    cardMedia: {
+        height: 400
+    },
+});

@@ -9,10 +9,10 @@ class UserProfile(models.Model):
     
     birth_date = models.DateField()
     bio = models.TextField(blank=True, null=True)
-    picture = models.ImageField(upload_to=PICTURE_UPLOAD_TO, default="default.jpg")
+    picture = models.ImageField(upload_to=PICTURE_UPLOAD_TO, default="images/nodp.jpg")
 
     # relationship
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
 
     def get_age(self):
         """Get user age in a format of 'x years'"""
