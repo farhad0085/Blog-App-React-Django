@@ -8,7 +8,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Hidden from '@material-ui/core/Hidden';
-import {Link} from 'react-router-dom'
+import {Link as RouterLink} from 'react-router-dom'
 import { Button } from '@material-ui/core';
 import {getPostTime} from '../utils'
 
@@ -36,7 +36,7 @@ export default function PostList(props) {
                     <div className={classes.cardDetails}>
                         <CardContent>
                             <Typography component="h2" variant="h5">
-                                <Link to={`/post/${post.id}`}>{post.title}</Link>
+                                <RouterLink to={`/post/${post.id}`}>{post.title}</RouterLink>
                             </Typography>
                             <Typography variant="body2" color="textSecondary" component="p">
                                 Last updated: {getPostTime(post.date_updated)}
@@ -45,12 +45,12 @@ export default function PostList(props) {
                                 {post.excerpt}
                             </Typography>
                             <Typography variant="subtitle1" color="primary">
-                            <Link to={`/post/${post.id}`}><Button color="primary">Continue reading...</Button></Link>
+                            <Button component={RouterLink} to={`/post/${post.id}`} color="primary">Read More</Button>
                             </Typography>
                         </CardContent>
                     </div>
                     <Hidden xsDown>
-                        <CardMedia className={classes.cardMedia} image={post.featured_image} title={post.title} />
+                        <CardMedia className={classes.cardMedia} image={post.picture} title={post.title} />
                     </Hidden>
                 </Card>
             </CardActionArea>

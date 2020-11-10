@@ -27,16 +27,25 @@ export default class Post {
     }
 
     async createPost(postData) {
-        console.log("postData", postData);
+        const headers = getHeaders()
+        headers['content-type'] = 'multipart/form-data'
+        
+        let form_data = new FormData();
+        
+        form_data.append('title', postData.title);
+        form_data.append('body', postData.body);
+
+        if (postData.picture){
+            form_data.append('picture', postData.picture, postData.picture.name);
+        }
+
         try {
-            const { data } = await axios.post(`/posts/`, {
-                title: postData.title,
-                body: postData.body
-            }, {headers: getHeaders()})
+            const { data } = await axios.post(`/posts/`, form_data, {headers: headers})
             return data
         }
-        catch {
-            throw new Error("Error creating project")
+
+        catch (err) {
+            throw err
         }
     }
 

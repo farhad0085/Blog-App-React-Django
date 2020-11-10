@@ -9,6 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {PostContext} from '../contexts/postContext'
 import { Input } from '@material-ui/core';
+import Loading from '../components/loading'
 
 
 
@@ -37,15 +38,39 @@ export default function SignIn() {
 
     const [state, setState] = useState({
         title: '',
-        body: ''
+        body: '',
+        picture: null
     })
+
+    const [loading, setLoading] = useState(false)
+
+    const [error, setError] = useState({
+        title: null,
+        body: null,
+        picture: null
+    })
+
     const {post} = useContext(PostContext)
 
     const submitHandler = (e) => {
         e.preventDefault()
+        
+        setLoading(true)
+
         post.createPost(state)
-        .then(data => console.log(data))
-        .catch(err => console.log(err))
+        .then(data => {
+            console.log(data);
+            setLoading(false)
+        })
+        .catch(err => {
+            setError({
+                title: err.response.data.title || '',
+                body: err.response.data.body || '',
+                picture: err.response.data.picture || ''
+            })
+            setLoading(false)
+        })
+        console.log("Error state", error);
     }
 
     const changeHandler = e => {
@@ -54,6 +79,13 @@ export default function SignIn() {
             [e.target.name]: e.target.value
         })
     } 
+
+    const handleImageChange = (e) => {
+        setState({
+            ...state,
+            picture: e.target.files[0]
+        })
+    };
 
     return (
         <Container component="main" maxWidth="lg">
@@ -70,7 +102,6 @@ export default function SignIn() {
                         onChange={changeHandler}
                         variant="outlined"
                         margin="normal"
-                        required
                         fullWidth
                         id="title"
                         label="Post title"
@@ -81,7 +112,6 @@ export default function SignIn() {
                         onChange={changeHandler}
                         variant="outlined"
                         margin="normal"
-                        required
                         fullWidth
                         multiline
                         rows={10}
@@ -90,9 +120,11 @@ export default function SignIn() {
                         id="body"
                     />
                     <Input
+                        onChange={handleImageChange}
                         variant="outlined"
                         fullWidth
                         label="Featured Image"
+                        name='picture'
                         type='file'
                         />
                     <Button
@@ -102,7 +134,7 @@ export default function SignIn() {
                         color="primary"
                         className={classes.submit}
                     >
-                        Create Post
+                        {loading ? <Loading color="#ffffff" size='10px' /> : "Create Post"}
                     </Button>
                     
                 </form>

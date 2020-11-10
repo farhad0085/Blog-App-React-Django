@@ -49,7 +49,7 @@ export default function PostList(props) {
             {loading ? <Loading /> : (
                 <Card className={classes.card}>
                     <div className={classes.cardDetails}>
-                    <CardMedia className={classes.cardMedia} image={state.featured_image} title={state.title} />
+                    <CardMedia className={classes.cardMedia} image={state.picture} title={state.title} />
 
                         <CardContent>
                             <Typography component="h2" variant="h5">
@@ -57,7 +57,7 @@ export default function PostList(props) {
                             </Typography>
 
                             <Typography variant="body2" color="textSecondary" component="p">
-                            Last updated: {getPostTime(post.date_updated)}
+                                Last updated: {getPostTime(state.date_updated)}
                             </Typography>
                             <hr/>
 

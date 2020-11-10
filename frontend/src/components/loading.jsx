@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        padding: theme.spacing(3, 2),
+        padding: theme.spacing(1.5, 2),
         display: "flex",
         flexDirection: "row",
         justifyContent: "center"

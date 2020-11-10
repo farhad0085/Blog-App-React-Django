@@ -19,7 +19,6 @@ class PostProvider extends Component {
 
 
     componentDidMount() {
-        console.log("called this");
         post.getPosts()
             .then((data) => this.setState({
                 data: data,
