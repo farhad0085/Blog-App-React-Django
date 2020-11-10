@@ -7,7 +7,7 @@ PICTURE_UPLOAD_TO = "images"
 class UserProfile(models.Model):
     """Hold some extra fields for default user model"""
     
-    birth_date = models.DateField()
+    birth_date = models.DateField(null=True, blank=True)
     bio = models.TextField(blank=True, null=True)
     picture = models.ImageField(upload_to=PICTURE_UPLOAD_TO, default="images/nodp.jpg")
 
@@ -16,10 +16,11 @@ class UserProfile(models.Model):
 
     def get_age(self):
         """Get user age in a format of 'x years'"""
-
-        birth_date = self.birth_date
-        return timesince.timesince(birth_date)
-
+        try:
+            birth_date = self.birth_date
+            return timesince.timesince(birth_date)
+        except:
+            return "Birthday not available"
 
     def __str__(self):
         """String representation for this model"""
