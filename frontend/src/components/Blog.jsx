@@ -1,48 +1,55 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
 import PostList from './PostList';
 import { PostContext } from '../contexts/postContext';
 import { createUUID } from '../utils'
 import Loading from './loading';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import Box from '@material-ui/core/Box';
 import Alert from './Alert'
-import { makeStyles } from '@material-ui/core/styles';
+import Pagination from './Pagination'
 
 
-export default function Blog() {
-    const classes = useStyles();
+export default function Blog(props) {
 
     const [state, setState] = useState({
-        loading: true,
         error: null,
         data: {
             results: []
         }
     })
 
+    const [loading, setLoading] = useState(true)
+
     const { post } = useContext(PostContext)
     const posts = state.data.results
 
-    post.getPosts()
-        .then((data) => {
-            if (state.data.results.length !== data.results.length) {
-                setState({
-                    data: data,
-                    error: null,
-                    loading: false
-                })
-            }
-        })
-        .catch(e => {
-            setState({
-                ...state,
-                loading: false,
-                error: "Failed to load posts at this moment. Please try again later!"
-            })
-        })
+    const pageNumber = props.match.params.pageNumber || 1
 
+    function getPosts(pageNumber) {
+        post.getPosts(pageNumber)
+            .then((data) => {
+                if (JSON.stringify(state.data.results) !== JSON.stringify(data.results)) {
+                    setState({
+                        data: data,
+                        error: null
+                    })
+                    setLoading(false)
+                }
+            })
+            .catch(e => {
+                setState({
+                    ...state,
+                    error: "Failed to load posts at this moment. Please try again later!"
+                })
+                setLoading(false)
+            })
+    }
+
+    useEffect(() => {
+        setLoading(true)
+    }, [pageNumber])
+
+    getPosts(pageNumber)
 
     return (
         <>
@@ -50,28 +57,25 @@ export default function Blog() {
                 <br />
                 <Typography component="h2" variant="h4">
                     Recent updates
+                    
                 </Typography>
                 <hr />
                 <br />
                 <br />
-                {state.loading ? <Loading /> : (
+                {loading ? <Loading /> : (
                     <>
                         <Grid container spacing={4}>
                             {posts.map((post) => (
                                 <PostList key={createUUID()} post={post} />
                             ))}
-                            
+
                         </Grid>
                         <br />
-                        
-                        {/* Pagination */}
-                        <Box component="span">
-                            <Button variant="contained" className={classes.prevButton} color="primary">Previous</Button>
-                            <Button variant="contained" className={classes.nextButton} color="primary">Next</Button>
-                        </Box>
+
+                        <Pagination />
+
                     </>
                 )}
-
                 {state.error && (
                     <Alert duration={6000} message={state.error} type="error" />
                 )}
@@ -81,15 +85,3 @@ export default function Blog() {
         </>
     );
 }
-
-
-
-const useStyles = makeStyles((theme) => ({
-   
-    prevButton: {
-        marginRight: theme.spacing(2),
-    },
-    nextButton: {
-        float: 'right'
-    },
-}));
