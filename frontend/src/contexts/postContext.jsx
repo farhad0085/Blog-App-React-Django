@@ -17,14 +17,17 @@ class PostProvider extends Component {
         }
     }
 
-
-    componentDidMount() {
+    getPosts() {
         post.getPosts()
-            .then((data) => this.setState({
-                data: data,
-                error: null,
-                loading: false
-            }))
+            .then((data) => {
+                // if (this.state.data.results !== data.results) {
+                    this.setState({
+                        data: data,
+                        error: null,
+                        loading: false
+                    })
+                // }
+            })
             .catch(e => {
                 this.setState({
                     loading: false,
@@ -32,12 +35,16 @@ class PostProvider extends Component {
                 })
             })
     }
-    
+
+    componentDidMount() {
+        this.getPosts()
+    }
+
 
     render() {
-        
+        console.log('render called');
         return (
-            <Provider value={{ ...this.state, post }}>
+            <Provider value={{ ...this.state, post, getPosts: this.getPosts.bind(this) }}>
                 {this.props.children}
             </Provider>
         );

@@ -10,8 +10,9 @@ import Alert from './Alert'
 
 export default function Blog() {
 
-    const { data, loading, error } = useContext(PostContext)
+    const { data, loading, error, getPosts } = useContext(PostContext)
     const posts = data.results
+    // getPosts()
 
     return (
         <>

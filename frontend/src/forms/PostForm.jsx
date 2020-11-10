@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function SignIn() {
+export default function SignIn(props) {
     const classes = useStyles();
 
     const [state, setState] = useState({
@@ -59,8 +59,8 @@ export default function SignIn() {
 
         post.createPost(state)
             .then(data => {
-                console.log(data);
                 setLoading(false)
+                props.history.push(`/post/${data.id}`)
             })
             .catch(err => {
                 setError({
