@@ -3,11 +3,11 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import { Add as AddIcon} from '@material-ui/icons';
+import { Add as AddIcon } from '@material-ui/icons';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import {PostContext} from '../contexts/postContext'
+import { PostContext } from '../contexts/postContext'
 import { Input } from '@material-ui/core';
 import Loading from '../components/loading'
 
@@ -50,26 +50,26 @@ export default function SignIn() {
         picture: null
     })
 
-    const {post} = useContext(PostContext)
+    const { post } = useContext(PostContext)
 
     const submitHandler = (e) => {
         e.preventDefault()
-        
+
         setLoading(true)
 
         post.createPost(state)
-        .then(data => {
-            console.log(data);
-            setLoading(false)
-        })
-        .catch(err => {
-            setError({
-                title: err.response.data.title || '',
-                body: err.response.data.body || '',
-                picture: err.response.data.picture || ''
+            .then(data => {
+                console.log(data);
+                setLoading(false)
             })
-            setLoading(false)
-        })
+            .catch(err => {
+                setError({
+                    title: err.response.data.title || '',
+                    body: err.response.data.body || '',
+                    picture: err.response.data.picture || ''
+                })
+                setLoading(false)
+            })
         console.log("Error state", error);
     }
 
@@ -78,7 +78,7 @@ export default function SignIn() {
             ...state,
             [e.target.name]: e.target.value
         })
-    } 
+    }
 
     const handleImageChange = (e) => {
         setState({
@@ -126,7 +126,7 @@ export default function SignIn() {
                         label="Featured Image"
                         name='picture'
                         type='file'
-                        />
+                    />
                     <Button
                         type="submit"
                         fullWidth
@@ -136,7 +136,7 @@ export default function SignIn() {
                     >
                         {loading ? <Loading color="#ffffff" size='10px' /> : "Create Post"}
                     </Button>
-                    
+
                 </form>
             </div>
         </Container>
