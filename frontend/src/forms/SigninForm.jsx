@@ -24,8 +24,7 @@ export default function SignIn(props) {
     const submitHandler = e => {
         e.preventDefault()
 
-        user.login(state.username, state.password)
-        props.history.push('/')
+        user.login(state.username, state.password, props.history)
 
     }
 

@@ -15,12 +15,13 @@ class AuthProvider extends Component {
             login: {},
             register: {}
         },
-        login: (username, password) => this.login(username, password),
-        register: (email, username, password) => this.register(email, username, password),
+        login: (username, password, history) => this.login(username, password, history),
+        register: (email, username, password, history) => this.register(email, username, password, history),
         logout: () => this.logout(),
     }
 
-    login(username, password){
+    login(username, password, history){
+        console.log("history", history);
         user.login(username, password)
             .then(data => {
                 this.setState({
@@ -30,6 +31,10 @@ class AuthProvider extends Component {
                         register: {}
                     }
                 })
+
+                // send user to home page
+                history.push('/')
+
             })
             .catch(err => {
                 console.dir(err);
@@ -43,7 +48,7 @@ class AuthProvider extends Component {
             })
     }
 
-    register(email, username, password){
+    register(email, username, password, history){
         user.register(email, username, password)
             .then(data => {
                 this.setState({
@@ -53,6 +58,7 @@ class AuthProvider extends Component {
                         register: {}
                     }
                 })
+                history.push('/')
             })
             .catch(err => {
                 console.dir(err);

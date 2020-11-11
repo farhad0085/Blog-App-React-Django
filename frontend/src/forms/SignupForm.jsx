@@ -31,8 +31,7 @@ export default function SignUp(props) {
 
     const submitHandler = e => {
         e.preventDefault()
-        user.register(state.email, state.username, state.password)
-        props.history.push('/')
+        user.register(state.email, state.username, state.password, props.history)
     }
 
     return (
