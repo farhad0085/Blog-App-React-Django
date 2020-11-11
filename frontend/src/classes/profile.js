@@ -17,6 +17,18 @@ export default class Profile {
         }
     }
 
+
+    async getOwnProfileData() {
+        try {
+            const { data } = await axios.get("/auth/user/", {headers: getHeaders()})
+            return data
+        }
+        catch (err) {
+            throw err
+        }
+    }
+
+
     async updateProfile(postData){
         console.log(postData);
         try {

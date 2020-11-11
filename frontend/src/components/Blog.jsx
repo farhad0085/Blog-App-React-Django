@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import PostList from './PostList';
 import { PostContext } from '../contexts/postContext';
 import { createUUID } from '../utils'
-import Loading from './loading';
+import Loading from './Loading';
 import Typography from '@material-ui/core/Typography';
 import Alert from './Alert'
 import Pagination from './Pagination'

@@ -32,7 +32,6 @@ class UserSerializer(ModelSerializer):
         profile.bio = profile_data.get('bio', profile.bio)
         profile.save()
 
-        print("profile_data", profile_data)
 
         # now our main instance
         instance.email = validated_data.get('email', instance.email)

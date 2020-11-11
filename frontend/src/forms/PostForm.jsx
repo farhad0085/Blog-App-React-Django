@@ -9,7 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { PostContext } from '../contexts/postContext'
 import { Input } from '@material-ui/core';
-import Loading from '../components/loading'
+import Loading from '../components/Loading'
 import { AuthContext } from '../contexts/authContext';
 
 

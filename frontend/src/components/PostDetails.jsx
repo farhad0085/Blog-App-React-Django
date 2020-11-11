@@ -6,7 +6,7 @@ import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import { useState } from 'react';
-import Loading from './loading'
+import Loading from './Loading'
 import { getPostTime } from '../utils'
 import { PostContext } from '../contexts/postContext'
 import { Link } from '@material-ui/core'
