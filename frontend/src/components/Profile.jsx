@@ -30,7 +30,6 @@ const Profile = (props) => {
 
     profile.getOwnProfileData()
         .then(data => {
-            console.log("data", data);
             if (data.pk !== currentUser.pk) {
                 setCurrentUser(data)
             }
@@ -49,7 +48,6 @@ const Profile = (props) => {
                         <CardContent>
                             <Typography component="h2" variant="h5">
                                 {state.username}
-                                {console.log(currentUser, state)}
                                 {currentUser.pk === state.id && (
                                     <Button
                                         onClick={() => setShowProfileForm(!showProfileForm)}

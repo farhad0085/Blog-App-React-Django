@@ -56,7 +56,7 @@ export default function SignIn(props) {
                 })
                 setLoading(false)
             })
-        console.log("Error state", error);
+        // console.log("Error state", error);
     }
 
     const changeHandler = e => {

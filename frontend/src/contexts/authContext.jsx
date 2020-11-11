@@ -21,7 +21,6 @@ class AuthProvider extends Component {
     }
 
     login(username, password, history){
-        console.log("history", history);
         user.login(username, password)
             .then(data => {
                 this.setState({
@@ -77,7 +76,6 @@ class AuthProvider extends Component {
         this.setState({
             isAuthenticated: false
         })
-        console.log(this.props);
     }
 
     render() {
