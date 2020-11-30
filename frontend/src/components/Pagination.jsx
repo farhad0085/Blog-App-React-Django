@@ -14,28 +14,32 @@ export default function Pagination() {
 
     return (
         <Box component="span">
+            {(post.hasNext || post.hasPrev) && (
+                <>
+                    <Button
+                        disabled={!post.hasPrev}
+                        to={`/page/${parseInt(post.currentPage) - 1}`}
+                        component={RouterLink}
+                        variant="contained"
+                        className={classes.prevButton}
+                        color="primary"
+                    >
+                        Previous
+                    </Button>
 
-            <Button
-                disabled={!post.hasPrev}
-                to={`/page/${parseInt(post.currentPage) - 1}`}
-                component={RouterLink}
-                variant="contained"
-                className={classes.prevButton}
-                color="primary"
-            >
-                Previous
-            </Button>
+                    <Button
+                        component={RouterLink}
+                        to={`/page/${parseInt(post.currentPage) + 1}`}
+                        disabled={!post.hasNext}
+                        variant="contained"
+                        className={classes.nextButton}
+                        color="primary"
+                    >
+                        Next
+                    </Button>
+                </>
+            )}
 
-            <Button
-                component={RouterLink}
-                to={`/page/${parseInt(post.currentPage) + 1}`}
-                disabled={!post.hasNext}
-                variant="contained"
-                className={classes.nextButton}
-                color="primary"
-            >
-                Next
-            </Button>
 
         </Box>
     )
